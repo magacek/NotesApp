@@ -10,6 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
+/**
+ * Fragment representing the detail view of a single note.
+ * Allows users to create a new note or edit an existing one.
+ * Provides functionality for saving the note to the database.
+ *
+ * @author Matt Gacek
+ */
+
 class NoteFragment : Fragment(R.layout.fragment_note) {
 
     private lateinit var viewModel: NotesViewModel

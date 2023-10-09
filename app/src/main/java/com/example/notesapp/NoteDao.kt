@@ -7,6 +7,13 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
+/**
+ * Data Access Object (DAO) for the [Note] entity. Provides methods for CRUD operations
+ * on the notes table, such as inserting, updating, deleting, and querying notes.
+ *
+ * @author Matt Gacek
+ */
+
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM notes")

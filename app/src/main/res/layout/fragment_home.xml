@@ -16,7 +16,7 @@
         android:id="@+id/addNoteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Note"
+        android:text="ADD NOTE"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:paddingStart="20dp"

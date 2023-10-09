@@ -13,6 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager // Import this
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
+/**
+ * Represents the home screen where notes are displayed in a list.
+ * Provides functionality to view, add, and delete notes.
+ *
+ * @author Matt Gacek
+ */
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var viewModel: NotesViewModel
