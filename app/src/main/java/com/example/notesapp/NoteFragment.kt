@@ -44,6 +44,16 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
                 }
                 parentFragmentManager.popBackStack()
             }
+
+        }
+
+    }
+    fun deleteNote() {
+        currentNote?.let { note ->
+            lifecycleScope.launch {
+                viewModel.delete(note)
+                parentFragmentManager.popBackStack()
+            }
         }
     }
 }

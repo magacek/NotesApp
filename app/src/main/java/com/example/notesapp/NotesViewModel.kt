@@ -13,28 +13,41 @@ class NotesViewModel : ViewModel() {
     private val _notes = MutableLiveData<List<Note>>()
     val notes: LiveData<List<Note>> = _notes
 
+    private var userNotesRef: DatabaseReference? = null
+    private var valueEventListener: ValueEventListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            val notesList = mutableListOf<Note>()
+            for (noteSnapshot in snapshot.children) {
+                val note = noteSnapshot.getValue(Note::class.java)
+                if (note != null) {
+                    notesList.add(note)
+                }
+            }
+            _notes.value = notesList
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            // Handle error
+        }
+    }
+
     init {
-        loadNotes()
+        // Set up an authentication state listener
+        auth.addAuthStateListener {
+            // Load notes whenever the authentication state changes
+            loadNotes()
+        }
     }
 
     private fun loadNotes() {
-        val userNotesRef = database.child(auth.currentUser?.uid ?: "")
-        userNotesRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val notesList = mutableListOf<Note>()
-                for (noteSnapshot in snapshot.children) {
-                    val note = noteSnapshot.getValue(Note::class.java)
-                    if (note != null) {
-                        notesList.add(note)
-                    }
-                }
-                _notes.value = notesList
-            }
+        // Remove any existing listeners from previous users
+        userNotesRef?.removeEventListener(valueEventListener)
 
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error
-            }
-        })
+        // Get a reference to the current user's notes
+        userNotesRef = database.child(auth.currentUser?.uid ?: "")
+
+        // Set up a new listener for this user's notes
+        userNotesRef?.addValueEventListener(valueEventListener)
     }
 
     fun insert(note: Note) {
@@ -56,5 +69,11 @@ class NotesViewModel : ViewModel() {
 
     fun getNoteById(noteId: String): Note? {
         return _notes.value?.find { it.id == noteId }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        // Remove the listener when the ViewModel is destroyed
+        userNotesRef?.removeEventListener(valueEventListener)
     }
 }

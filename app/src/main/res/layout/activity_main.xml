@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/activity_main.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,29 +10,48 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
+        android:background="#BB66CC">
 
-        <!-- Add Note Button -->
-        <ImageButton
-            android:id="@+id/addNoteButtonToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        android:layout_gravity="start"
-        android:contentDescription="Add Note"
-        android:padding="16dp"/>
-<!--        android:src="@drawable/ic_add_note"-->
-        <!-- User Authentication Button -->
-        <ImageButton
-            android:id="@+id/userAuthButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <!-- Title -->
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" />
 
-        android:layout_gravity="end"
-        android:contentDescription="User Authentication"
-        android:padding="16dp"/>
+            <!-- Add Note Button -->
+            <ImageButton
+                android:id="@+id/addNoteButtonToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="Add Note"
+                android:padding="16dp"
+                android:layout_toLeftOf="@id/userAuthButton"
+                android:layout_marginEnd="5dp" />
+
+            <!-- User Authentication Button -->
+            <ImageButton
+                android:id="@+id/userAuthButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="User Authentication"
+                android:padding="16dp"
+                android:src="@drawable/ic_user_icon"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp" />
+
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <!--            android:src="@drawable/ic_user_auth"-->
 
     <!-- Container for Fragments -->
     <FrameLayout

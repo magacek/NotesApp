@@ -1,8 +1,9 @@
 package com.example.notesapp
+
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,8 +15,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var viewModel: NotesViewModel
     private val adapter by lazy {
         NoteAdapter(
-            onTitleClick = { note -> navigateToNoteFragment(note.id) },
-            onDeleteClick = { note -> showDeleteDialog(note) }
+            onTitleClick = { note -> navigateToNoteFragment(note.id) }
         )
     }
 
@@ -25,11 +25,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val notesRecyclerView = view.findViewById<RecyclerView>(R.id.notesRecyclerView)
         notesRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         notesRecyclerView.adapter = adapter
+        setupNotesObserver()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
+        setupNotesObserver()
+    }
+
+    private fun setupNotesObserver() {
         viewModel.notes.observe(viewLifecycleOwner) { notes ->
             adapter.submitList(notes)
-        }
-        view.findViewById<Button>(R.id.addNoteButton).setOnClickListener {
-            navigateToNoteFragment(null)
         }
     }
 
@@ -45,16 +52,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .commit()
     }
 
-    private fun showDeleteDialog(note: Note) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Delete Note")
-            .setMessage("Are you sure you want to delete this note?")
-            .setPositiveButton("Yes") { _, _ ->
-                lifecycleScope.launch {
-                    viewModel.delete(note)
-                }
-            }
-            .setNegativeButton("No", null)
-            .show()
-    }
 }

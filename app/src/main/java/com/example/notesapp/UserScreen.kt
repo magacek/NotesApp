@@ -19,22 +19,27 @@ class UserScreen : Fragment(R.layout.fragment_user_screen) {
 
         val emailEditText = view.findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = view.findViewById<EditText>(R.id.passwordEditText)
+        val signUpButton = view.findViewById<Button>(R.id.signUpButton)
+        val signInButton = view.findViewById<Button>(R.id.signInButton)
+        val signOutButton = view.findViewById<Button>(R.id.signOutButton)
 
-        view.findViewById<Button>(R.id.signUpButton).setOnClickListener {
+        signUpButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
             signUp(email, password)
         }
 
-        view.findViewById<Button>(R.id.signInButton).setOnClickListener {
+        signInButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
             signIn(email, password)
         }
 
-        view.findViewById<Button>(R.id.signOutButton).setOnClickListener {
+        signOutButton.setOnClickListener {
             signOut()
         }
+
+        updateUI()
     }
 
     private fun signUp(email: String, password: String) {
@@ -42,6 +47,7 @@ class UserScreen : Fragment(R.layout.fragment_user_screen) {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(context, "Sign Up Successful", Toast.LENGTH_SHORT).show()
+                    updateUI()
                     navigateToHomeFragment()
                 } else {
                     Toast.makeText(context, "Sign Up Failed", Toast.LENGTH_SHORT).show()
@@ -54,22 +60,31 @@ class UserScreen : Fragment(R.layout.fragment_user_screen) {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(context, "Sign In Successful", Toast.LENGTH_SHORT).show()
+                    updateUI()
                     navigateToHomeFragment()
                 } else {
                     Toast.makeText(context, "Sign In Failed", Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
     private fun signOut() {
         auth.signOut()
         Toast.makeText(context, "Signed Out", Toast.LENGTH_SHORT).show()
-        navigateToHomeFragment()
+        updateUI()
     }
 
     private fun navigateToHomeFragment() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.container, HomeFragment())
             .commit()
+    }
+
+    private fun updateUI() {
+        val isSignedIn = auth.currentUser != null
+        view?.findViewById<EditText>(R.id.emailEditText)?.visibility = if (isSignedIn) View.GONE else View.VISIBLE
+        view?.findViewById<EditText>(R.id.passwordEditText)?.visibility = if (isSignedIn) View.GONE else View.VISIBLE
+        view?.findViewById<Button>(R.id.signUpButton)?.visibility = if (isSignedIn) View.GONE else View.VISIBLE
+        view?.findViewById<Button>(R.id.signInButton)?.visibility = if (isSignedIn) View.GONE else View.VISIBLE
+        view?.findViewById<Button>(R.id.signOutButton)?.visibility = if (isSignedIn) View.VISIBLE else View.GONE
     }
 }
