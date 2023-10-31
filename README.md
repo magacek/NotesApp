@@ -15,6 +15,7 @@ The following required functionality is completed:
 
 **The following extensions are implemented:**
 
+
 LiveData for real-time UI updates.
 ViewModel to manage the UI-related data.
 Firebase integration for real-time data synchronization across devices.
