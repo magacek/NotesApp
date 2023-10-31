@@ -1,35 +1,30 @@
 package com.example.notesapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
-/**
- * Fragment representing the detail view of a single note.
- * Allows users to create a new note or edit an existing one.
- * Provides functionality for saving the note to the database.
- *
- * @author Matt Gacek
- */
-
 class NoteFragment : Fragment(R.layout.fragment_note) {
-
     private lateinit var viewModel: NotesViewModel
     private var currentNote: Note? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel = ViewModelProvider(requireActivity())[NotesViewModel::class.java]
 
+        // Fetch note ID from arguments
+        val noteId = arguments?.getString("NOTE_ID")
 
-        currentNote = arguments?.getSerializable("NOTE") as Note?
+        // If noteId is not null, fetch the note from the ViewModel
+        if (noteId != null) {
+            currentNote = viewModel.getNoteById(noteId)
+        }
+
         currentNote?.let {
             view.findViewById<EditText>(R.id.titleEditText).setText(it.title)
             view.findViewById<EditText>(R.id.descriptionEditText).setText(it.description)
@@ -44,19 +39,11 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
                     val updatedNote = currentNote!!.copy(title = title, description = description)
                     viewModel.update(updatedNote)
                 } else {
-                    val newNote = Note(id = 0, title = title, description = description)
+                    val newNote = Note(id = "", title = title, description = description)
                     viewModel.insert(newNote)
                 }
-                viewModel.refreshNotes()
-
-                val allNotes = viewModel.getAllNotesForDebugging()
-                allNotes.forEach { note ->
-                    Log.d("DEBUG", "Note ID: ${note.id}, Title: ${note.title}")
-                }
-
                 parentFragmentManager.popBackStack()
             }
         }
-
     }
 }

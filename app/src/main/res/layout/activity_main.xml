@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/container"
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"/>
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+
+        <!-- Add Note Button -->
+        <ImageButton
+            android:id="@+id/addNoteButtonToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+        android:layout_gravity="start"
+        android:contentDescription="Add Note"
+        android:padding="16dp"/>
+<!--        android:src="@drawable/ic_add_note"-->
+        <!-- User Authentication Button -->
+        <ImageButton
+            android:id="@+id/userAuthButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+        android:layout_gravity="end"
+        android:contentDescription="User Authentication"
+        android:padding="16dp"/>
+    </androidx.appcompat.widget.Toolbar>
+    <!--            android:src="@drawable/ic_user_auth"-->
+
+    <!-- Container for Fragments -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
