@@ -1,47 +1,60 @@
-**Project 6**
+**Project 8
+**
 
-**Description of the project**
-Building on the foundations laid in the previous projects, Project 6 is a Notes App that allows users to create, view, edit, and delete notes. The project leverages Android's Room persistence library to provide a local database, ensuring that the notes are stored securely and can be accessed efficiently.
+**Description of the Project**
+Building upon Project 6, Project 8 enhances the Notes App by integrating it with Firebase. This update allows for real-time synchronization of notes across devices and user authentication to provide a personalized experience. The app now allows users to create an account, sign in, and have their notes saved securely in Firebase's realtime database.
 
 **Functionality**
 The following required functionality is completed:
 
-[Notes Database]
-[Note CRUD Operations]
+[Firebase Realtime Database]
+[Firebase Authentication]
+[Notes CRUD Operations]
 [UI for Viewing and Editing Notes]
-The following extensions are implemented:
+[User Authentication Screen]
+
+**The following extensions are implemented:**
 
 LiveData for real-time UI updates.
 ViewModel to manage the UI-related data.
-Room Database for local data persistence.
-Adapter pattern with RecyclerView for efficient listing of notes.
-Data Binding for UI components.
-Video Walkthrough
+Firebase integration for real-time data synchronization across devices.
+Adapter pattern with RecyclerView for efficient listing of notes in a staggered grid layout.
+User authentication flow for personalized note management.
+Changes from Project 6
+
+Shifted from using Room Database to Firebase's realtime database for storing notes.
+Added user authentication features allowing users to sign up, sign in, and sign out.
+Updated the UI to include an authentication screen and added a sign-out option.
+Enhanced the notes listing to use a StaggeredGridLayoutManager with 2 columns.
+Implemented real-time synchronization of notes to reflect changes across different devices instantly.
+
+**Video Walkthrough**
 Here's a walkthrough of implemented user stories:
 
+![Project%208%20Video](https://github.com/magacek/NotesApp/assets/70607808/16e43a0c-953c-4222-b8ac-5081f1654872)
 
-![project6](https://github.com/magacek/NotesApp/assets/70607808/173d4026-eb10-48f3-8c8d-42a4bf2cd6f5)
 
 GIF created with LiceCap.
 
 **Notes**
 Describe any challenges encountered while building the app.
 
-One of the challenges faced during the development of this project was integrating the Room Database with LiveData and ensuring that the UI updates in real-time when the database changes. Additionally, handling data persistence and ensuring that notes are updated accurately in the database required careful implementation.
+Integrating Firebase for both authentication and real-time data persistence posed new challenges, such as ensuring data consistency and managing user sessions effectively.
 
-    License
-    sql
-    Copy code
-     Copyright [2023] [Mateusz Gacek]
-    
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
+License
 
-     http://www.apache.org/licenses/LICENSE-2.0
+**sql**
+Copy code
+ Copyright [2023] [Mateusz Gacek]
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
