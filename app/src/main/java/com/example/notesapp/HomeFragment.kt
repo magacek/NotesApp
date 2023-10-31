@@ -10,7 +10,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.coroutines.launch
-
+/**
+ * A Fragment class that represents the home screen of the NotesApp.
+ * It displays a list of notes in a staggered grid layout and allows the user to navigate
+ * to the details of a selected note.
+ *
+ * The fragment observes changes in the list of notes and updates the UI accordingly.
+ *
+ * @author Matt
+ */
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var viewModel: NotesViewModel
     private val adapter by lazy {

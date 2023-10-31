@@ -5,6 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+/**
+ * A ViewModel class for managing and manipulating the notes data in the NotesApp.
+ * This class handles the interactions with Firebase for authentication, and CRUD operations for notes.
+ * It observes changes in the Firebase database and updates the LiveData object accordingly.
+ * The ViewModel survives configuration changes and allows the data to be kept in memory.
+ *
+ * @author Matt
+ */
 
 class NotesViewModel : ViewModel() {
 

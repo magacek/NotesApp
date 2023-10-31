@@ -7,6 +7,14 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+/**
+ * A Fragment class that represents the user authentication screen of the NotesApp.
+ * This fragment provides options for the user to sign up, sign in, and sign out.
+ * Upon successful authentication, the fragment navigates to the HomeFragment.
+ * The UI is dynamically updated based on the authentication state of the user.
+ *
+ * @author Matt
+ */
 
 class UserScreen : Fragment(R.layout.fragment_user_screen) {
 

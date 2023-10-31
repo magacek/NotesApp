@@ -7,6 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+/**
+ * An adapter class for managing and displaying a list of notes in a RecyclerView.
+ * This class handles the creation of view holders for the notes, binds the data to
+ * the views, and updates the list of notes efficiently using DiffUtil.
+ *
+ * @param onTitleClick A callback function to be invoked when the title of a note is clicked.
+ * @param onDeleteClick An optional callback function to be invoked when a note is to be deleted.
+ * @author Matt
+ */
 
 class NoteAdapter(
     private val onTitleClick: (Note) -> Unit,

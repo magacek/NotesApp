@@ -6,6 +6,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+/**
+ * The main activity for the NotesApp, serving as the entry point of the application.
+ * This activity is responsible for setting up the toolbar, handling navigation between
+ * fragments, and updating the UI elements based on the current fragment.
+ * It loads either the UserScreen or the HomeFragment when the app starts, based on
+ * the authentication state of the user.
+ *
+ * @author Matt
+ */
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
